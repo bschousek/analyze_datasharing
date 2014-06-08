@@ -1,6 +1,6 @@
-library(lubridate)
-library(ggplot2)
-library(dplyr)
+require(lubridate)
+require(ggplot2)
+require(dplyr)
 #load("compiled.rda")
 
 interesting<-data.frame(id=jforks$id)
@@ -32,7 +32,32 @@ a<-interesting %.%
     group_by(created.month,created.year)%.%
     mutate(running=cumsum(total))
 
-ggplot(a,aes(x=created.null,y=running))+geom_line(aes(group=created.month,col=created.month))
-ggplot(a,aes(x=created.null,y=total))+geom_line(aes(group=created.month,col=created.month))
 
-#b<-a%.%group_by(created.month)%.%mutate(running=cumsum(total))
+b<-a%.%
+    select(created.null,total)%.%
+    group_by(created.null)%.%
+    summarize(total=sum(total))%.%
+    mutate(running=cumsum(total))
+b$created.month<-as.factor(rep("total",length(b$total)))
+b$created.year<-b$created.month
+c<-rbind(a,b)
+title<-paste("Forked repos for",interesting$coursename[1])
+ggplot(c,aes(x=created.null,y=running))+
+    geom_line(aes(group=created.month,col=created.month))+
+    ggtitle(title)+
+    xlab("time since start of class (days)")+
+    ylab("running total of repos forked")
+    
+
+
+ggplot(c,aes(x=created.null,y=total))+
+    geom_line(aes(group=created.month,col=created.month))+
+    ggtitle(title)+
+    xlab("time since start of class (days)")+
+    ylab("repos forked per day")
+
+#ggplot(b,aes(x=created.null,y=total))+geom_line()
+#ggplot(a,aes(x=created.null,y=running))+
+#    geom_line(aes(group=created.month,col=created.month))+
+#    geom_line(b,aes(x=created.null,y=running))
+
