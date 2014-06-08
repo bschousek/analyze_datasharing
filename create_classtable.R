@@ -1,0 +1,48 @@
+
+#datasharing
+month=as.factor(c(4,5,6))
+year=as.factor(c(2014,2014,2014))
+coursename=rep("datasharing",length(month))
+start=c(7,5,2)
+due=c(28,28,28)
+classtable1<-data.frame(coursename=coursename,
+                       created.month=month,
+                       created.year=year,
+                       start=start,
+                       due=due)
+
+#ExData_Plotting1
+month=as.factor(c(5,6))
+year=as.factor(c(2014,2014))
+coursename=rep("ExData_Plotting1",length(month))
+start=c(5,2)
+due=c(28,28)
+classtable2<-data.frame(coursename=coursename,
+                       created.month=month,
+                       created.year=year,
+                       start=start,
+                       due=due)
+
+#ProgrammingAssignment2
+month=as.factor(c(4,5,6))
+year=as.factor(c(2014,2014,2014))
+coursename=rep("ProgrammingAssignment2",length(month))
+start=c(7,5,2)
+due=c(28,28,28)
+classtable3<-data.frame(coursename=coursename,
+                        created.month=month,
+                        created.year=year,
+                        start=start,
+                        due=due)
+#RepData_PeerAssessment1
+month=as.factor(c(4,5,6))
+year=as.factor(c(2014,2014,2014))
+coursename=rep("RepData_PeerAssessment1",length(month))
+start=c(7,5,2)
+due=c(28,28,28)
+classtable4<-data.frame(coursename=coursename,
+                        created.month=month,
+                        created.year=year,
+                        start=start,
+                        due=due)
+classtable<-rbind(classtable1,classtable2,classtable3,classtable4)
