@@ -28,18 +28,24 @@ repolist<-c("https://api.github.com/repos/jtleek/datasharing/forks",
             "https://api.github.com/repos/rdpeng/RepData_PeerAssessment1/forks",
             "https://api.github.com/repos/rdpeng/ExData_Plotting1/forks",
             "https://api.github.com/repos/rdpeng/ProgrammingAssignment2/forks")
-repolist<-c("https://api.github.com/repos/rdpeng/RepData_PeerAssessment1/forks",
-            "https://api.github.com/repos/rdpeng/ExData_Plotting1/forks",
-            "https://api.github.com/repos/rdpeng/ProgrammingAssignment2/forks")
+outlist<-c("datasharing",
+           "Reproducible1",
+           "Exploratory1",
+           "Rprogramming")
+           #repolist<-c("https://api.github.com/repos/rdpeng/RepData_PeerAssessment1/forks",
+#            "https://api.github.com/repos/rdpeng/ExData_Plotting1/forks",
+#            "https://api.github.com/repos/rdpeng/ProgrammingAssignment2/forks")
 
-nexturl<-"https://api.github.com/repos/jtleek/datasharing/forks"
+nexturl<-"https://api.github.com/repos/jtleek/datasharing/forks?per_page=100"
 
 source("fn.checkrepo.r")
 biglist<-data.frame()
 for (nexturl in repolist) {
     jforks<-checkrepo(nexturl)
     jforks$reponame<-rep(nexturl,length(jforks$id))
-    fname<-paste(make.names(nexturl),make.names(Sys.time()),".rda",sep="")
+    
+    fname<-paste(make.names(Sys.time()),outlist[which(repolist==nexturl)],".rda",sep="")
+    
     save(jforks,file=fname)
 }
 #save(jforks,file="compiled.rda")

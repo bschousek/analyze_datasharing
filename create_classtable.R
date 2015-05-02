@@ -1,10 +1,15 @@
+library(lubridate)
+classdates<-NULL
+classdates$session.name<-c("January.1970","April.2014","May.2014","June.2014","July.2014","August.2014","September.2014","October.2014","November.2014")
+classdates$start<-mdy(c("1/1/1970","4/7/2014","5/4/2014","6/2/2014","7/7/2014","8/4/2014","9/1/2014","10/6/2014","11/3/2014"))
+classdates$end<-mdy(c("1/30/1970","5/6/2014","6/2/2014","7/1/2014","8/4/2014","9/1/2014","9/29/2014","11/3/2014","12/1/2014"))
 
 #datasharing
-month=as.factor(c(4,5,6))
-year=as.factor(c(2014,2014,2014))
+month=as.factor(c(4,5,6,7))
+year=as.factor(c(2014,2014,2014,2014))
 coursename=rep("datasharing",length(month))
-start=c(7,5,2)
-due=c(28,28,28)
+start=c(7,5,2,7)
+due=c(28,28,28,28)
 classtable1<-data.frame(coursename=coursename,
                        created.month=month,
                        created.year=year,
@@ -12,11 +17,11 @@ classtable1<-data.frame(coursename=coursename,
                        due=due)
 
 #ExData_Plotting1
-month=as.factor(c(5,6))
-year=as.factor(c(2014,2014))
+month=as.factor(c(5,6,7))
+year=as.factor(c(2014,2014,2014))
 coursename=rep("ExData_Plotting1",length(month))
-start=c(5,2)
-due=c(28,28)
+start=c(5,2,7)
+due=c(28,28,28)
 classtable2<-data.frame(coursename=coursename,
                        created.month=month,
                        created.year=year,
@@ -24,22 +29,22 @@ classtable2<-data.frame(coursename=coursename,
                        due=due)
 
 #ProgrammingAssignment2
-month=as.factor(c(4,5,6))
-year=as.factor(c(2014,2014,2014))
+month=as.factor(c(4,5,6,7))
+year=as.factor(c(2014,2014,2014,2014))
 coursename=rep("ProgrammingAssignment2",length(month))
-start=c(7,5,2)
-due=c(28,28,28)
+start=c(7,5,2,7)
+due=c(28,28,28,28)
 classtable3<-data.frame(coursename=coursename,
                         created.month=month,
                         created.year=year,
                         start=start,
                         due=due)
 #RepData_PeerAssessment1
-month=as.factor(c(4,5,6))
-year=as.factor(c(2014,2014,2014))
+month=as.factor(c(4,5,6,7))
+year=as.factor(c(2014,2014,2014,2014))
 coursename=rep("RepData_PeerAssessment1",length(month))
-start=c(7,5,2)
-due=c(28,28,28)
+start=c(7,5,2,7)
+due=c(28,28,28,28)
 classtable4<-data.frame(coursename=coursename,
                         created.month=month,
                         created.year=year,

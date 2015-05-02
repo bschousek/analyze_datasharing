@@ -1,60 +1,34 @@
 ```{r datasharing,echo=F,message=F,fig.height=5,fig.width=10}
-load("https...api.github.com.repos.jtleek.datasharing.forksX2014.06.08.09.23.23.rda")
-source("create_classtable.R")
-source("procdata2.R")
-ggplot(c,aes(x=created.null,y=running))+
-    geom_line(aes(group=created.month,col=created.month))+
-    ggtitle(title)+
-    xlab("time since start of class (days)")+
-    ylab("running total of repos forked")
-ggplot(c,aes(x=created.null,y=total))+
-    geom_line(aes(group=created.month,col=created.month))+
-    ggtitle(title)+
-    xlab("time since start of class (days)")+
-    ylab("repos forked per day")
+infiles<-c("X2015.04.29datasharing.rda",
+           "X2015.04.29Reproducible1.rda",
+           "X2015.04.29Exploratory1.rda",
+           "X2015.04.29Rprogramming.rda")
 ```
-```{r ProgrammingAssignment2,echo=F,message=F,fig.height=5,fig.width=10}
-load("https...api.github.com.repos.rdpeng.ProgrammingAssignment2.forksX2014.06.08.09.16.15.rda")
-source("create_classtable.R")
-source("procdata2.R")
-ggplot(c,aes(x=created.null,y=running))+
-    geom_line(aes(group=created.month,col=created.month))+
-    ggtitle(title)+
-    xlab("time since start of class (days)")+
-    ylab("running total of repos forked")
-ggplot(c,aes(x=created.null,y=total))+
-    geom_line(aes(group=created.month,col=created.month))+
-    ggtitle(title)+
-    xlab("time since start of class (days)")+
-    ylab("repos forked per day")
+```{r makeplots, message=FALSE}
+process <- function(infile) {
+    
+    load(infile)
+    source("create_classtable.R")
+    source("procdata2.R")
+    #str(c)
+    plot1<-ggplot(c,aes(x=created.null,y=running))+
+        geom_line(aes(group=created.month,col=created.month))+
+        ggtitle(title)+
+        xlab("time since start of class (days)")+
+        ylab("running total of repos forked")
+    plot2<-ggplot(c,aes(x=created.null,y=total))+
+        geom_line(aes(group=created.month,col=created.month))+
+        ggtitle(title)+
+        xlab("time since start of class (days)")+
+        ylab("repos forked per day")
+    #return (c(plot1,plot2))
+    print(plot1)
+    print(plot2)
+    #return(plot1)
+    }
 ```
-```{r ExData_Plotting1,echo=F,message=F,fig.height=5,fig.width=10}
-load("https...api.github.com.repos.rdpeng.ExData_Plotting1.forksX2014.06.08.09.13.15.rda")
-source("create_classtable.R")
-source("procdata2.R")
-ggplot(c,aes(x=created.null,y=running))+
-    geom_line(aes(group=created.month,col=created.month))+
-    ggtitle(title)+
-    xlab("time since start of class (days)")+
-    ylab("running total of repos forked")
-ggplot(c,aes(x=created.null,y=total))+
-    geom_line(aes(group=created.month,col=created.month))+
-    ggtitle(title)+
-    xlab("time since start of class (days)")+
-    ylab("repos forked per day")
-```
-```{r RepData_PeerAssessment1,echo=F,message=F,fig.height=5,fig.width=10}
-load("https...api.github.com.repos.rdpeng.RepData_PeerAssessment1.forksX2014.06.08.09.11.57.rda")
-source("create_classtable.R")
-source("procdata2.R")
-ggplot(c,aes(x=created.null,y=running))+
-    geom_line(aes(group=created.month,col=created.month))+
-    ggtitle(title)+
-    xlab("time since start of class (days)")+
-    ylab("running total of repos forked")
-ggplot(c,aes(x=created.null,y=total))+
-    geom_line(aes(group=created.month,col=created.month))+
-    ggtitle(title)+
-    xlab("time since start of class (days)")+
-    ylab("repos forked per day")
+```{r message=FALSE}
+    for (infile in infiles) {
+    process(infile)
+}
 ```

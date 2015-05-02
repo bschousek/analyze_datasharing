@@ -1,0 +1,60 @@
+```{r datasharing,echo=F,message=F,fig.height=5,fig.width=10}
+library(plyr)
+source("procdata3.R")
+infiles<-c("X2014.08.05datasharing.rda",
+           "X2014.08.05Reproducible1.rda",
+           "X2014.08.05Exploratory1.rda",
+           "X2014.08.05Rprogramming.rda")
+classnames<-c("datasharing","Reproducible1","Exploratory1","Rprogramming")
+interesting=ldply(infiles,process3)   
+interesting$class_session<-as.factor(interesting$class_session)
+``
+```{r message=FALSE}
+#     load(infile)
+#     source("create_classtable.R")
+#     source("procdata3.R")
+#     #str(c)
+library(reshape2)
+    classtotals<-interesting %.%
+        select(coursename,created.relative,class_session) %.%
+        group_by(coursename,created.relative,class_session)%.%
+        arrange(coursename,class_session,created.relative)%.%
+        mutate(dummy=1)%.%
+        summarize(total=sum(dummy))%.%
+        group_by(coursename,class_session)%.%
+        mutate(running=cumsum(total))
+    overalltotals<-interesting %.%
+        select(created.relative,class_session) %.%
+        group_by(class_session,created.relative)%.%
+        arrange(class_session,created.relative)%.%
+        mutate(dummy=1)%.%
+        summarize(total=sum(dummy))%.%
+        group_by(class_session)%.%
+        mutate(running=cumsum(total))
+    #here are names split up
+    nl=c("j1","j2","j3","username","foldername")
+    nstuff=colsplit(interesting$html_url,"/",nl)
+    
+
+plot1<-ggplot(classtotals,aes(x=created.relative,y=running))+
+        geom_line(aes(group=class_session,col=class_session))+
+        ggtitle(title)+
+        xlab("time since start of class (days)")+
+        ylab("running total of repos forked")+
+        facet_grid(coursename~.)
+    plot2<-ggplot(overalltotals,aes(x=created.relative,y=total))+
+        geom_line(aes(group=class_session,col=class_session))+
+        ggtitle(title)+
+        xlab("time since start of class (days)")+
+        ylab("repos forked per day")
+#     #return (c(plot1,plot2))
+#     print(plot1)
+#     print(plot2)
+#     #return(plot1)
+#     }
+```
+```{r message=FALSE}
+    for (infile in infiles) {
+    process(infile)
+}
+```
